@@ -13,11 +13,12 @@ const webpackConfig = (env): Configuration => ({
 	output: {
 		path: path.join(__dirname, '/dist'),
 		filename: 'build.js',
+		assetModuleFilename: 'images/[hash][ext][query]',
 	},
 	module: {
 		rules: [
 			{
-				test: /\.css$/,
+				test: /\.(scss|css)$/,
 				use: ['style-loader', 'css-loader'],
 			},
 			{
@@ -27,6 +28,10 @@ const webpackConfig = (env): Configuration => ({
 					transpileOnly: true,
 				},
 				exclude: /dist/,
+			},
+			{
+				test: /\.(png|svg|jpg|jpeg|gif)$/i,
+				type: 'asset/resource',
 			},
 		],
 	},
